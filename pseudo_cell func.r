@@ -1,7 +1,7 @@
 if (F) {
     #Author: zhuzhiyong
     #mail: zhuzhiyong@genomics.cn
-    #create time   : Tue 17 May 2022 02:38:27 PM CST
+    #create time: Tue 17 May 2022 02:38:27 PM CST
     # object: input your matrix with seurat object
     # organize: with column in meta.date(cell-level) you want group by
     # cell_n: cell number define to condense
@@ -49,7 +49,7 @@ pseudo_cell <- function(object,organize="orig.ident",cell_n=10,method = 'average
                 ###labeling group number on cell-level meta.data
                 subObj.chunk@meta.data <- subObj.chunk@meta.data %>% mutate(cellN=colnames(subObj.chunk)) %>% group_by(get(organize)) %>% 
                     mutate( bins.no = rep(1:ceiling(n()/cell_n), each=cell_n, length.out=n()) ) %>% 
-                    mutate(pseudo_label=paste0(get(organize),"_N.",bins.no,".",chunk)) %>% tibble::column_to_rownames('cellN') %>% data.frame()
+                    mutate(pseudo_label=paste0(get(organize),"_N.",bins.no)) %>% tibble::column_to_rownames('cellN') %>% data.frame()
                 agg.counts <- average_expr(subObj.chunk,categorie=categorie,chunk.no = chunk)
                 data.list.tmp[[chunk]] <- CreateSeuratObject(counts = agg.counts)
                 data.list.tmp[[chunk]]$orig.ident <- categorie
