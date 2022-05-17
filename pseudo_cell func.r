@@ -8,8 +8,10 @@ if (F) {
     # method: aggregate expression by average
     # chunk_size: split datasets to chunk, default 10000 cells a chunk 
 }
+#Usage: sc <- pseudo_cell(sc,organize="seurat_clusters",cell_n=5)
 #define a pseudo_cell func
 pseudo_cell <- function(object,organize="orig.ident",cell_n=10,method = 'average',chunk_size=100000){
+    library(Seurat);library(dplyr)
     average_expr <- function(myobject,categorie,chunk.no=1){
         if( ncol(myobject) >1){
             ##generate category.matrix
