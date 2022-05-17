@@ -12,7 +12,7 @@ if (F) {
 #define a pseudo_cell func
 pseudo_cell <- function(object,organize="orig.ident",cell_n=10,method = 'average',chunk_size=100000){
     library(Seurat);library(dplyr)
-    average_expr <- function(myobject,categorie,chunk.no=1){
+    average_expr <- function(myobject,categorie,chunk.no){
         if( ncol(myobject) >1){
             ##generate category.matrix
             category <- myobject@meta.data[,'pseudo_label']
