@@ -48,7 +48,6 @@ pseudo_cell <- function(object,organize="orig.ident",cell_n=10,method = 'average
                 subObj.chunk@meta.data <- subObj.chunk@meta.data %>% mutate(cellN=colnames(subObj.chunk)) %>% group_by(get(organize)) %>% 
                     mutate( bins.no = rep(1:ceiling(n()/cell_n), each=cell_n, length.out=n()) ) %>% 
                     mutate(pseudo_label=paste0(get(organize),"_N.",bins.no,".",chunk)) %>% tibble::column_to_rownames('cellN') %>% data.frame()
-                
                 agg.counts <- average_expr(subObj.chunk,categorie=categorie,chunk.no = chunk)
                 data.list.tmp[[chunk]] <- CreateSeuratObject(counts = agg.counts)
                 data.list.tmp[[chunk]]$orig.ident <- categorie
@@ -56,7 +55,6 @@ pseudo_cell <- function(object,organize="orig.ident",cell_n=10,method = 'average
             toRet.chunk = data.list.tmp[[chunk]]
             if (length(data.list.tmp) > 1) {toRet.chunk <- merge(data.list.tmp[[1]],data.list.tmp[2:length(data.list.tmp)])}
             data.list[[idx]] <- DietSeurat(toRet.chunk)
-            
         }else{#小于chunk size的数据集
             subObj@meta.data <- subObj@meta.data %>% mutate(cellN=colnames(subObj)) %>% group_by(get(organize)) %>% 
                 mutate( bins.no = rep(1:ceiling(n()/cell_n), each=cell_n, length.out=n()) ) %>% 
