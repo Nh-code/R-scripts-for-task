@@ -19,7 +19,7 @@ pseudo_cell <- function(object,organize="orig.ident",cell_n=10,method = 'average
             if (length(table(category)) >1 ) {
                 category.matrix <- Matrix::sparse.model.matrix( ~ -1 + category )
                 colnames(category.matrix) <- gsub("category","",colnames(category.matrix))
-                # colnames(category.matrix) <- paste0(colnames(category.matrix),".",chunk.no)
+                colnames(category.matrix) <- paste0(colnames(category.matrix),".",chunk.no)
             }else{
                 category.matrix <- matrix(data = 1, nrow = ncol(myobject),dimnames = list(Cells(myobject), paste0(categorie,"_N.1.",chunk.no)))
             }
