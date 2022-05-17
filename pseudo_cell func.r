@@ -33,6 +33,7 @@ pseudo_cell <- function(object,organize="orig.ident",cell_n=10,method = 'average
         }
         return(aggreate.counts)
     }
+    DefaultAssay(object) <- "RNA" ##
     categories=names(table(object@meta.data[,organize]))
     data.list <- list()
     for ( idx in 1:length(categories)) {
